@@ -14,10 +14,10 @@ import java.sql.SQLException;
  * @author mejia
  */
 public class Conexion {
-    private String usuario = "juandiegows";
+    private String usuario = "sa";
     private String contraseña = "12345";
     private String bd = "Viviendas";
-    private final String Servidor = "JUANDIEGOWS";
+    private final String Servidor = "localhost";
     private final String puerto = "1433";
     private String connectionUrl = "jdbc:sqlserver://"+Servidor+":"+puerto
             +";TrustServerCertificate=True;databaseName=" 
