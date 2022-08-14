@@ -174,9 +174,7 @@ INSERT [dbo].[Departamento] ([ID], [Nombre]) VALUES (32, N'VAUPES')
 GO
 INSERT [dbo].[Departamento] ([ID], [Nombre]) VALUES (33, N'VICHADA')
 GO
-INSERT [dbo].[Departamento] ([ID], [Nombre]) VALUES (34, N'NatyEGO')
-GO
-INSERT [dbo].[Departamento] ([ID], [Nombre]) VALUES (35, N'NatyEGO')
+
 GO
 SET IDENTITY_INSERT [dbo].[Departamento] OFF
 GO
