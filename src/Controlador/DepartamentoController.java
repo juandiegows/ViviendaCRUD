@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
 
 import Modelo.DepartamentoDAO;
@@ -13,7 +9,7 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author mejia
+ * @author JuanDiegoWS
  */
 public class DepartamentoController extends Conexion {
 
@@ -25,11 +21,10 @@ public class DepartamentoController extends Conexion {
      * @throws java.sql.SQLException
      */
     public int Create(DepartamentoDAO departamento) throws SQLException {
-        String sql = "insert into Departamento(Nombre) values(?)";
+        String sql = "INSERT INTO Departamento(Nombre) VALUES (?)";
         PreparedStatement oPreparedStatement = conecta().prepareStatement(sql);
         oPreparedStatement.setString(1, departamento.getNombre());
         return oPreparedStatement.executeUpdate();
-
     }
 
     /**
@@ -40,7 +35,7 @@ public class DepartamentoController extends Conexion {
      */
     public ArrayList<DepartamentoDAO> Get() throws SQLException {
         ArrayList<DepartamentoDAO> departamentosList = new ArrayList<>();
-        String query = "SELECT * FROM Departamento order by Nombre";
+        String query = "SELECT * FROM Departamento ORDER BY Nombre";
         Statement st = conecta().createStatement();
         ResultSet rs = st.executeQuery(query);
         while (rs.next()) {
