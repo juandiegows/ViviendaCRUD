@@ -1,8 +1,11 @@
 
 import Controlador.Conexion;
 import Controlador.DepartamentoController;
+import Controlador.EstadoCivilController;
 import Modelo.DepartamentoDAO;
+import Modelo.EstadoCivilDAO;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,17 +22,18 @@ public class program {
     public static void main(String[] args)  {
        DepartamentoController d= new DepartamentoController();
        
-        try {
-            
-            if(d.Create(new DepartamentoDAO(0,"NatyEGO"))>0){
-                
-                System.out.println("El registro fue guardado exitosamente");
-            }else{
-                System.out.println("El registro no fue guardado");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(program.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       EstadoCivilController oEstadoCivilController = new EstadoCivilController();
+      // oEstadoCivilController.Add(new EstadoCivilDAO(7, "Gay"));
+       System.out.println("Deleted " + oEstadoCivilController.DELETE(6));
+       
+       ArrayList <EstadoCivilDAO> lista = oEstadoCivilController.get();
+       for(EstadoCivilDAO EstadoCivil: lista){
+           System.out.println(EstadoCivil.toString());
+       }
+       
+       
+       
+       
     }
     
 }
