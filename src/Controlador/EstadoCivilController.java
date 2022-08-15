@@ -34,7 +34,7 @@ public class EstadoCivilController extends Conexion{
     // Consulta
     public EstadoCivilDAO Get (int ID){
         try{
-            String query = "SELECT * FROM EstadoCivil WHERE "+ID;
+            String query = "SELECT * FROM EstadoCivil WHERE ID="+ID; 
             Statement sr = conecta().createStatement();
             ResultSet rs = sr.executeQuery(query);
             if(rs.next()){
@@ -48,19 +48,19 @@ public class EstadoCivilController extends Conexion{
         return null;
     }
     
-    public boolean Add(EstadoCivilDAO E){
+    public int Add(EstadoCivilDAO E){
         try{
             String query = "INSERT INTO EstadoCivil (ID, Nombre) Values (?,?)";
             PreparedStatement opreparedStatement = conecta().prepareStatement(query);
             opreparedStatement.setInt(1, E.getID());
             opreparedStatement.setString(2, E.getNombre());
-            return opreparedStatement.executeUpdate() >= 1;
+            return opreparedStatement.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
-            return false;
+            return 0;
         }
     }
-    public boolean Update(int ID, EstadoCivilDAO E) {
+    public int Update(int ID, EstadoCivilDAO E) {
         try {
 
             String query = "UPDATE EstadoCivil SET ID = ?, Nombre = ? WHERE ID = ?";
@@ -70,24 +70,28 @@ public class EstadoCivilController extends Conexion{
            
             opreparedStatement.setInt(1, E.getID());
             opreparedStatement.setString(2, E.getNombre());
-            return opreparedStatement.executeUpdate() >= 1;
+            return opreparedStatement.executeUpdate();
 
         } catch (SQLException e) {
                  e.printStackTrace();
-            return false;
+            return 0;
         }
     }
-    public boolean DELETE (int ID){
+    public int DELETE (int ID){
         try{
             String query="DELETE FROM EstadoCivil WHERE ID = ? ";
             PreparedStatement opreparedStatement = conecta().prepareStatement(query);
             opreparedStatement.setInt(1, ID);           
-            return opreparedStatement.executeUpdate() >= 1;
+            return opreparedStatement.executeUpdate();
             
         }catch(SQLException e){
             e.printStackTrace();
-            return false; 
+            return 0; 
         }
+    }
+
+    int get(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

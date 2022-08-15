@@ -1,4 +1,3 @@
-
 package Modelo;
 
 /**
@@ -6,9 +5,11 @@ package Modelo;
  * @author JoseJorgeSarmientoAm
  */
 public class PersonaDAO {
-     private int Cedula;
-     private String Nombre; 
-     private int EstadoCivilID;
+
+    private int Cedula;
+    private String Nombre;
+    private int EstadoCivilID;
+    private EstadoCivilDAO EstadoCivil;
 
     public PersonaDAO() {
     }
@@ -18,6 +19,22 @@ public class PersonaDAO {
         this.Nombre = Nombre;
         this.EstadoCivilID = EstadoCivilID;
     }
+
+    public PersonaDAO(int Cedula, String Nombre, int EstadoCivilID, EstadoCivilDAO EstadoCivil) {
+        this.Cedula = Cedula;
+        this.Nombre = Nombre;
+        this.EstadoCivilID = EstadoCivilID;
+        this.EstadoCivil = EstadoCivil;
+    }
+
+    public EstadoCivilDAO getEstadoCivil() {
+        return EstadoCivil;
+    }
+
+    public void setEstadoCivil(EstadoCivilDAO EstadoCivil) {
+        this.EstadoCivil = EstadoCivil;
+    }
+    
 
     public int getCedula() {
         return Cedula;
@@ -45,7 +62,8 @@ public class PersonaDAO {
 
     @Override
     public String toString() {
-        return "PersonaDAO{" + "Cedula=" + Cedula + ", Nombre=" + Nombre + ", EstadoCivilID=" + EstadoCivilID + '}';
+        return "PersonaDAO{" + "Cedula=" + Cedula + ", Nombre=" + Nombre + ", EstadoCivilID=" + EstadoCivilID + ", EstadoCivil=" + EstadoCivil + '}';
     }
-     
+
+    
 }
