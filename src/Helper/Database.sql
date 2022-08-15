@@ -1,12 +1,137 @@
+CREATE DATABASE [Viviendas]
+USE [Viviendas]
+
+GO
+ALTER TABLE [dbo].[Vivienda] DROP CONSTRAINT [FK_vivienda_TipoVivienda]
+GO 
+ALTER TABLE [dbo].[Vivienda] DROP CONSTRAINT [FK_vivienda_municipios]
+GO
+ALTER TABLE [dbo].[PersonaVivienda] DROP CONSTRAINT [FK_Posee_vivienda]
+GO
+ALTER TABLE [dbo].[PersonaVivienda] DROP CONSTRAINT [FK_Posee_Persona]
+GO
+ALTER TABLE [dbo].[Persona] DROP CONSTRAINT [FK_Persona_EstadoCivil]
+GO
+ALTER TABLE [dbo].[Municipio] DROP CONSTRAINT [FK_municipios_Departamento]
+GO
+/****** Object:  Table [dbo].[Vivienda]    Script Date: 15/08/2022 16:28:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Vivienda]') AND type in (N'U'))
+DROP TABLE [dbo].[Vivienda]
+GO
+/****** Object:  Table [dbo].[TipoVivienda]    Script Date: 15/08/2022 16:28:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TipoVivienda]') AND type in (N'U'))
+DROP TABLE [dbo].[TipoVivienda]
+GO
+/****** Object:  Table [dbo].[PersonaVivienda]    Script Date: 15/08/2022 16:28:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PersonaVivienda]') AND type in (N'U'))
+DROP TABLE [dbo].[PersonaVivienda]
+GO
+/****** Object:  Table [dbo].[Persona]    Script Date: 15/08/2022 16:28:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Persona]') AND type in (N'U'))
+DROP TABLE [dbo].[Persona]
+GO
+/****** Object:  Table [dbo].[Municipio]    Script Date: 15/08/2022 16:28:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Municipio]') AND type in (N'U'))
+DROP TABLE [dbo].[Municipio]
+GO
+/****** Object:  Table [dbo].[EstadoCivil]    Script Date: 15/08/2022 16:28:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[EstadoCivil]') AND type in (N'U'))
+DROP TABLE [dbo].[EstadoCivil]
+GO
+/****** Object:  Table [dbo].[Departamento]    Script Date: 15/08/2022 16:28:51 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Departamento]') AND type in (N'U'))
+DROP TABLE [dbo].[Departamento]
+GO
 USE [master]
 GO
-/****** Object:  Database [Viviendas]    Script Date: 13/08/2022 9:12:41 p. m. ******/
-CREATE DATABASE [Viviendas]
+/****** Object:  Database [Viviendas]    Script Date: 15/08/2022 16:28:51 ******/
+DROP DATABASE [Viviendas]
 GO
-
+/****** Object:  Database [Viviendas]    Script Date: 15/08/2022 16:28:51 ******/
+CREATE DATABASE [Viviendas]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'Viviendas', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\Viviendas.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'Viviendas_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\Viviendas_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [Viviendas] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [Viviendas].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [Viviendas] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [Viviendas] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [Viviendas] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [Viviendas] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [Viviendas] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [Viviendas] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [Viviendas] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [Viviendas] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [Viviendas] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [Viviendas] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [Viviendas] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [Viviendas] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [Viviendas] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [Viviendas] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [Viviendas] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [Viviendas] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [Viviendas] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [Viviendas] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [Viviendas] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [Viviendas] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [Viviendas] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [Viviendas] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [Viviendas] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [Viviendas] SET  MULTI_USER 
+GO
+ALTER DATABASE [Viviendas] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [Viviendas] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [Viviendas] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [Viviendas] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [Viviendas] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [Viviendas] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [Viviendas] SET QUERY_STORE = OFF
+GO
 USE [Viviendas]
 GO
-
+/****** Object:  Table [dbo].[Departamento]    Script Date: 15/08/2022 16:28:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE TABLE [dbo].[Departamento](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Nombre] [varchar](50) NOT NULL,
@@ -16,13 +141,13 @@ CREATE TABLE [dbo].[Departamento](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[EstadoCivil]    Script Date: 13/08/2022 9:12:45 p. m. ******/
+/****** Object:  Table [dbo].[EstadoCivil]    Script Date: 15/08/2022 16:28:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[EstadoCivil](
-	[ID] [int] NOT NULL,
+	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Nombre] [varchar](50) NOT NULL,
  CONSTRAINT [PK_EstadoCivil] PRIMARY KEY CLUSTERED 
 (
@@ -30,13 +155,13 @@ CREATE TABLE [dbo].[EstadoCivil](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Municipio]    Script Date: 13/08/2022 9:12:45 p. m. ******/
+/****** Object:  Table [dbo].[Municipio]    Script Date: 15/08/2022 16:28:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Municipio](
-	[ID] [int] NOT NULL,
+	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Nombre] [varchar](50) NOT NULL,
 	[DepartamentoID] [int] NOT NULL,
  CONSTRAINT [PK_municipios] PRIMARY KEY CLUSTERED 
@@ -45,7 +170,7 @@ CREATE TABLE [dbo].[Municipio](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Persona]    Script Date: 13/08/2022 9:12:45 p. m. ******/
+/****** Object:  Table [dbo].[Persona]    Script Date: 15/08/2022 16:28:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -60,13 +185,13 @@ CREATE TABLE [dbo].[Persona](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PersonaVivienda]    Script Date: 13/08/2022 9:12:45 p. m. ******/
+/****** Object:  Table [dbo].[PersonaVivienda]    Script Date: 15/08/2022 16:28:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[PersonaVivienda](
-	[ID] [int] NOT NULL,
+	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[EscrituraID] [int] NOT NULL,
 	[CedulaID] [int] NOT NULL,
 	[Fecha] [date] NOT NULL,
@@ -76,7 +201,7 @@ CREATE TABLE [dbo].[PersonaVivienda](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TipoVivienda]    Script Date: 13/08/2022 9:12:45 p. m. ******/
+/****** Object:  Table [dbo].[TipoVivienda]    Script Date: 15/08/2022 16:28:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -90,7 +215,7 @@ CREATE TABLE [dbo].[TipoVivienda](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Vivienda]    Script Date: 13/08/2022 9:12:45 p. m. ******/
+/****** Object:  Table [dbo].[Vivienda]    Script Date: 15/08/2022 16:28:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -174,9 +299,9 @@ INSERT [dbo].[Departamento] ([ID], [Nombre]) VALUES (32, N'VAUPES')
 GO
 INSERT [dbo].[Departamento] ([ID], [Nombre]) VALUES (33, N'VICHADA')
 GO
-
-GO
 SET IDENTITY_INSERT [dbo].[Departamento] OFF
+GO
+SET IDENTITY_INSERT [dbo].[EstadoCivil] ON 
 GO
 INSERT [dbo].[EstadoCivil] ([ID], [Nombre]) VALUES (1, N'Soltero')
 GO
@@ -187,6 +312,10 @@ GO
 INSERT [dbo].[EstadoCivil] ([ID], [Nombre]) VALUES (4, N'Viudo')
 GO
 INSERT [dbo].[EstadoCivil] ([ID], [Nombre]) VALUES (5, N'Union Libre')
+GO
+SET IDENTITY_INSERT [dbo].[EstadoCivil] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Municipio] ON 
 GO
 INSERT [dbo].[Municipio] ([ID], [Nombre], [DepartamentoID]) VALUES (1, N'Cáceres', 1)
 GO
@@ -2428,6 +2557,8 @@ INSERT [dbo].[Municipio] ([ID], [Nombre], [DepartamentoID]) VALUES (1119, N'SANT
 GO
 INSERT [dbo].[Municipio] ([ID], [Nombre], [DepartamentoID]) VALUES (1120, N'CUMARIBO', 33)
 GO
+SET IDENTITY_INSERT [dbo].[Municipio] OFF
+GO
 INSERT [dbo].[Persona] ([Cedula], [Nombre], [EstadoCivilID]) VALUES (1006791459, N'Jose Jorge', 1)
 GO
 SET IDENTITY_INSERT [dbo].[TipoVivienda] ON 
@@ -2455,11 +2586,13 @@ ALTER TABLE [dbo].[PersonaVivienda] CHECK CONSTRAINT [FK_Posee_Persona]
 GO
 ALTER TABLE [dbo].[PersonaVivienda]  WITH CHECK ADD  CONSTRAINT [FK_Posee_vivienda] FOREIGN KEY([EscrituraID])
 REFERENCES [dbo].[Vivienda] ([Escritura])
+ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[PersonaVivienda] CHECK CONSTRAINT [FK_Posee_vivienda]
 GO
 ALTER TABLE [dbo].[Vivienda]  WITH CHECK ADD  CONSTRAINT [FK_vivienda_municipios] FOREIGN KEY([MunicipioID])
 REFERENCES [dbo].[Municipio] ([ID])
+ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Vivienda] CHECK CONSTRAINT [FK_vivienda_municipios]
 GO
