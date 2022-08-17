@@ -3,8 +3,10 @@
 import Controlador.MunicipioController;
 import Modelo.MunicipioDAO;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 
 
@@ -20,11 +22,11 @@ public class program {
     public static void main(String[] args)  {
         
         try {
-            new MunicipioController().Create(new MunicipioDAO("Natalia",19));
+            for(var s :new MunicipioController().Get())  
+                System.out.println(s);
         } catch (SQLException ex) {
             Logger.getLogger(program.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
       
        
       
