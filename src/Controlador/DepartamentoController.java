@@ -35,9 +35,11 @@ public class DepartamentoController extends Conexion {
      */
     public ArrayList<DepartamentoDAO> Get() throws SQLException {
         ArrayList<DepartamentoDAO> departamentosList = new ArrayList<>();
+        
         String query = "SELECT * FROM Departamento ORDER BY Nombre";
         Statement st = conecta().createStatement();
         ResultSet rs = st.executeQuery(query);
+        
         while (rs.next()) {
             departamentosList.add(new DepartamentoDAO(rs.getInt("ID"), rs.getString("Nombre")));
         }
