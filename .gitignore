@@ -1,7 +1,11 @@
-/nbproject/
-nbproject
-/dist/
-dist
-build
-/build/
+# netbeans specific # 
+nbproject/private/ 
+build/ 
+nbbuild/ 
+dist/ Fuente: https
+nbdist/ 
+nbactions.xml 
+nb-configuration.xml
 
+# Class Files # 
+*.class
