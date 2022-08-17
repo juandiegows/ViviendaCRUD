@@ -21,12 +21,7 @@ public class program {
      */
     public static void main(String[] args)  {
         
-        try {
-            for(var s :new MunicipioController().Get())  
-                System.out.println(s);
-        } catch (SQLException ex) {
-            Logger.getLogger(program.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
       
        
       
