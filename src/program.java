@@ -3,9 +3,11 @@ import Controlador.Conexion;
 import Controlador.DepartamentoController;
 import Controlador.EstadoCivilController;
 import Controlador.PersonaController;
+import Controlador.PersonaViviendaController;
 import Modelo.DepartamentoDAO;
 import Modelo.EstadoCivilDAO;
 import Modelo.PersonaDAO;
+import Modelo.PersonaViviendaDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -36,13 +38,18 @@ public class program {
        PersonaController oPersonaController = new PersonaController();
        ArrayList <PersonaDAO> lista = oPersonaController.Get();
        oPersonaController.Add(new PersonaDAO(27008373, "Martha Amaya", 1));  
-       System.out.println("Deleted "+oPersonaController.DELETE(27008373));
+       System.out.println("Deleted "+oPersonaController.DELETE(27008373));o 
        for(PersonaDAO persona: lista){
             System.out.println(persona.toString());
         }
        System.out.println("Updated : " + oPersonaController.UPDATE(27008373,new PersonaDAO(27008373,"Marta cuello", 2)));
        
        */
+       
+       //PersonaViviendaController oPersonaViviendaController = new PersonaViviendaController();
+       
+      // new PersonaViviendaDAO(1, 1, 1, new java.sql.Date(2022,8,31));
+       
     }
     
 }
