@@ -18,6 +18,12 @@ public class MunicipioDAO {
     public MunicipioDAO() {
     }
 
+    public MunicipioDAO(String Nombre, int DepartamentoID) {
+        this.Nombre = Nombre;
+        this.DepartamentoID = DepartamentoID;
+    }
+    
+ 
     public MunicipioDAO(int ID, String Nombre, int DepartamentoID) {
         this.ID = ID;
         this.Nombre = Nombre;
@@ -61,6 +67,11 @@ public class MunicipioDAO {
 
     public void setDepartamento(DepartamentoDAO Departamento) {
         this.Departamento = Departamento;
+    }
+
+    @Override
+    public String toString() {
+        return "MunicipioDAO{" + "ID=" + ID + ", Nombre=" + Nombre + ", DepartamentoID=" + DepartamentoID + ", Departamento=" + Departamento + '}';
     }
     
     
