@@ -17,7 +17,7 @@ public class PersonaViviendaController extends Conexion{
     
       public ArrayList<PersonaViviendaDAO> Get() throws SQLException{
         ArrayList<PersonaViviendaDAO> lista = new ArrayList<PersonaViviendaDAO>();
-        String query ="SELECT * FROM PersonaVivienda order by ID";
+        String query ="SELECT * FROM PersonaVivienda INNER JOIN Persona ON PersonaVivienda.CedulaID = Persona.Cedula INNER JOIN Vivienda ON PersonaVivienda.EscrituraID = Vivienda.Escritura order by Nombre;";
             Statement st= conecta().createStatement();
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){  
