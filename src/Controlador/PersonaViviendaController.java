@@ -1,6 +1,8 @@
 package Controlador;
 
+import Modelo.PersonaDAO;
 import Modelo.PersonaViviendaDAO;
+import Modelo.ViviendaDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,13 +15,15 @@ import java.util.ArrayList;
  */
 public class PersonaViviendaController extends Conexion{
     
-      public ArrayList<PersonaViviendaDAO> get() throws SQLException{
+      public ArrayList<PersonaViviendaDAO> Get() throws SQLException{
         ArrayList<PersonaViviendaDAO> lista = new ArrayList<PersonaViviendaDAO>();
         String query ="SELECT * FROM PersonaVivienda order by ID";
             Statement st= conecta().createStatement();
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){  
-                lista.add(new PersonaViviendaDAO(rs.getInt("ID"), rs.getInt("EscrituraID"), rs.getInt("CedulaID"),rs.getDate("Fecha"), null, new PersonaController().Get(rs.getInt("CedulaID"))));
+                lista.add(new PersonaViviendaDAO(rs.getInt("ID"), rs.getInt("EscrituraID"), rs.getInt("CedulaID"),rs.getDate("Fecha"),
+                        new ViviendaDAO(rs.getInt("Escritura"), rs.getInt("TipoViviendaID"), rs.getString("Dirección"), rs.getInt("MunicipioID")),
+                        new PersonaDAO(rs.getInt("Cedula"), rs.getString("Nombre"), rs.getInt("EstadoCivilID"))));
             }
             st.close();
         return lista;

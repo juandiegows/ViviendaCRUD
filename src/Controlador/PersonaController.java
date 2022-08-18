@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.EstadoCivilDAO;
 import Modelo.PersonaDAO;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,14 +16,18 @@ public class PersonaController extends Conexion {
 
     public ArrayList<PersonaDAO> Get() throws SQLException {
         ArrayList<PersonaDAO> lista = new ArrayList<PersonaDAO>();
-        String query = "SELECT * FROM Persona";
+        String query = "SELECT * FROM PersonaVivienda INNER JOIN Persona ON PersonaVivienda.CedulaID = Persona.Cedula INNER JOIN Vivienda ON PersonaVivienda.EscrituraID = Vivienda.Escritura;";
         Statement st = conecta().createStatement();
         ResultSet rs = st.executeQuery(query);
         while (rs.next()) {
-            lista.add(new PersonaDAO(rs.getInt("Cedula"), rs.getString("Nombre"), rs.getInt("EstadoCivilID"), new EstadoCivilController().Get(rs.getInt("EstadoCivilID"))));
+            lista.add(new PersonaDAO(rs.getInt("Cedula"), rs.getString("Nombre"),
+                    rs.getInt("EstadoCivilID"),
+                    new EstadoCivilDAO(rs.getInt("ID"), rs.getString("Nombre"))));
+        
         }
         st.close();
         return lista;
+        
     }
 
     public boolean Add(PersonaDAO p) throws SQLException {
