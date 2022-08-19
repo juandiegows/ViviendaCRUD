@@ -38,8 +38,7 @@ public class MunicipioController extends Conexion{
         if (rs.next()) {
             municipio = new MunicipioDAO(rs.getInt("ID"), rs.getString("Nombre"), rs.getInt("DepartamentoID"),
            new DepartamentoController().Get(rs.getInt("DepartamentoID")));
-        }
-        
+        } 
         return municipio;     
     }
     
@@ -52,11 +51,32 @@ public class MunicipioController extends Conexion{
        
        while(rs.next()){
            
-           municipioList.add(new MunicipioDAO(rs.getInt("M.ID"),rs.getString("M.Nombre"),rs.getInt("M.DepartamentoID"),
-           new DepartamentoDAO(rs.getInt("D.ID"),rs.getString("D.Nombre"))));    
+           municipioList.add(new MunicipioDAO(rs.getInt(1),rs.getString(2),rs.getInt(3),
+           new DepartamentoDAO(rs.getInt(4),rs.getString(5))));    
        }
         return municipioList;   
    }
     
+    public int Update(int ID, MunicipioDAO municipio) throws SQLException{
+        String sql = "UPDATE Municipio SET Nombre = ?, DepartamentoID = ? WHERE ID = ?";
+        PreparedStatement oPreparedStatement = conecta().prepareStatement(sql);
+        oPreparedStatement.setString(1, municipio.getNombre());
+        oPreparedStatement.setInt(2, municipio.getDepartamentoID());
+        oPreparedStatement.setInt(3, ID);
+        
+        return oPreparedStatement.executeUpdate();
+    }
+    
+    public int Delete(int ID) throws SQLException{
+        String sql = "DELETE FROM Municipio WHERE ID = ?";
+        PreparedStatement oPreparedStatement = conecta().prepareStatement(sql);
+        oPreparedStatement.setInt(1, ID);
+        
+        return oPreparedStatement.executeUpdate();
+        
+    }
+  
     
 }
+
+

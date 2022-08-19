@@ -1,4 +1,12 @@
 
+import Controlador.MunicipioController;
+import Modelo.MunicipioDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  *
  * @author mejia
@@ -7,10 +15,33 @@ public class program {
 
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
      */
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
+        
+        try {
+            System.out.println(new MunicipioController().Delete(1125));
+        } catch (SQLException ex) {
+            Logger.getLogger(program.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+    }
+        
+        
+        
+//        try {
+//            
+//            ArrayList<MunicipioDAO> mp = new MunicipioController().Get();
+//            for(MunicipioDAO m:mp){
+//                System.out.println(m);
+//            }
+//            
+//        } catch (SQLException ex) {
+//            Logger.getLogger(program.class.getName()).log(Level.SEVERE, null, ex);
+//        }
  
+
        
     }
     
-}
+
