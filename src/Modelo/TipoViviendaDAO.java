@@ -20,6 +20,13 @@ public class TipoViviendaDAO {
         this.Nombre = Nombre;
     }
 
+    public TipoViviendaDAO(String Nombre) {
+        this.Nombre = Nombre;
+    }
+    
+    
+    
+
     public int getID() {
         return ID;
     }
@@ -31,11 +38,15 @@ public class TipoViviendaDAO {
     public String getNombre() {
         return Nombre;
     }
+    
 
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "TipoViviendaDAO{" + "ID=" + ID + ", Nombre=" + Nombre + '}';
+    }
     
 }
