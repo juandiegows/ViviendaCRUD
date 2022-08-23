@@ -20,6 +20,10 @@ public class DepartamentoDAO {
         this.Nombre = Nombre;
     }
 
+    public DepartamentoDAO(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
     @Override
     public String toString() {
         return "DepartamentoDAO{" + "ID=" + ID + ", Nombre=" + Nombre + '}';
