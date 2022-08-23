@@ -35,11 +35,11 @@ public class DepartamentoController extends Conexion {
      */
     public ArrayList<DepartamentoDAO> Get() throws SQLException {
         ArrayList<DepartamentoDAO> departamentosList = new ArrayList<>();
-        
+
         String query = "SELECT * FROM Departamento ORDER BY Nombre";
         Statement st = conecta().createStatement();
         ResultSet rs = st.executeQuery(query);
-        
+
         while (rs.next()) {
             departamentosList.add(new DepartamentoDAO(rs.getInt("ID"), rs.getString("Nombre")));
         }
@@ -57,16 +57,15 @@ public class DepartamentoController extends Conexion {
      * @throws java.sql.SQLException
      */
     public DepartamentoDAO Get(int ID) throws SQLException {
-         DepartamentoDAO departamento = new DepartamentoDAO();
-        String query = "SELECT * FROM Departamento WHERE ID = ?" ;
+        
+        String query = "SELECT * FROM Departamento WHERE ID = ?";
         PreparedStatement st = conecta().prepareStatement(query);
         st.setInt(1, ID);
         ResultSet rs = st.executeQuery();
         if (rs.next()) {
-            departamento = new DepartamentoDAO(rs.getInt("ID"), rs.getString("Nombre"));
+            return new DepartamentoDAO(rs.getInt("ID"), rs.getString("Nombre"));
         }
-        return departamento;
-
+        return null;
 
     }
 
@@ -88,7 +87,9 @@ public class DepartamentoController extends Conexion {
     }
 
     /**
-     * Eliminar un departamento por ID sino hay municipio registrado con ese departamento
+     * Eliminar un departamento por ID sino hay municipio registrado con ese
+     * departamento
+     *
      * @param ID
      * @return
      * @throws java.sql.SQLException
