@@ -26,6 +26,7 @@ public class ViviendaDAO {
         this.MunicipioID = MunicipioID;
     }
 
+    
     public ViviendaDAO(int Escritura, int TipoViviendaID, TipoViviendaDAO TipoVivienda, String Direccion, int MunicipioID, MunicipioDAO Municipio) {
         this.Escritura = Escritura;
         this.TipoViviendaID = TipoViviendaID;
@@ -81,6 +82,11 @@ public class ViviendaDAO {
 
     public void setMunicipio(MunicipioDAO Municipio) {
         this.Municipio = Municipio;
+    }
+
+    @Override
+    public String toString() {
+        return "ViviendaDAO{" + "Escritura=" + Escritura + ", TipoViviendaID=" + TipoViviendaID + ", TipoVivienda=" + TipoVivienda + ", Direccion=" + Direccion + ", MunicipioID=" + MunicipioID + ", Municipio=" + Municipio + '}';
     }
     
     

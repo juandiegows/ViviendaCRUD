@@ -30,6 +30,13 @@ public class MunicipioDAO {
         this.DepartamentoID = DepartamentoID;
     }
 
+    public MunicipioDAO(String Nombre, DepartamentoDAO Departamento) {
+        this.Nombre = Nombre; 
+        this.Departamento = Departamento;
+    }
+    
+    
+
     public MunicipioDAO(int ID, String Nombre, int DepartamentoID, DepartamentoDAO Departamento) {
         this.ID = ID;
         this.Nombre = Nombre;
