@@ -29,31 +29,30 @@ public class MunicipioController extends Conexion {
     }
 
     public MunicipioDAO Get(int ID) throws SQLException {
-        MunicipioDAO municipio = new MunicipioDAO();
-
-        String sql = "SELECT * FROM Municipio INNER JOIN Departamento\n"
-                + "ON DepartamentoID = Departamento.ID WHERE Municipio.ID =?";
+        String sql = "SELECT M.ID AS MunicipioID,M.Nombre AS NombreMunicipio,DepartamentoID,D.Nombre AS NombreDepartamento FROM Municipio M \n"
+                + "INNER JOIN Departamento D ON DepartamentoID = D.ID WHERE M.ID = ?";
         PreparedStatement oPreparedStatement = conecta().prepareStatement(sql);
         oPreparedStatement.setInt(1, ID);
         ResultSet rs = oPreparedStatement.executeQuery();
         if (rs.next()) {
-            municipio = new MunicipioDAO(rs.getInt(1), rs.getString(2), rs.getInt(3),
-                    new DepartamentoDAO(rs.getInt(4), rs.getString(5)));
+            return new MunicipioDAO(rs.getInt("MunicipioID"), rs.getString("NombreMunicipio"), rs.getInt("DepartamentoID"),
+                    new DepartamentoDAO(rs.getInt("DepartamentoID"), rs.getString("NombreDepartamento")));
         }
-        return municipio;
+        return null;
     }
 
     public ArrayList<MunicipioDAO> Get() throws SQLException {
         ArrayList<MunicipioDAO> municipioList = new ArrayList<>();
 
-        String sql = "SELECT  * FROM Municipio as M INNER JOIN Departamento as D  ON  M.DepartamentoID = D.ID ORDER BY M.Nombre";
+        String sql = "SELECT M.ID AS MunicipioID,M.Nombre AS NombreMunicipio,DepartamentoID,D.Nombre AS NombreDepartamento FROM Municipio M \n"
+                + "INNER JOIN Departamento D ON DepartamentoID = D.ID";
         Statement st = conecta().createStatement();
         ResultSet rs = st.executeQuery(sql);
 
         while (rs.next()) {
 
-            municipioList.add(new MunicipioDAO(rs.getInt(1), rs.getString(2), rs.getInt(3),
-                    new DepartamentoDAO(rs.getInt(4), rs.getString(5))));
+            municipioList.add(new MunicipioDAO(rs.getInt("MunicipioID"), rs.getString("NombreMunicipio"), rs.getInt("DepartamentoID"),
+                    new DepartamentoDAO(rs.getInt("DepartamentoID"), rs.getString("NombreDepartamento"))));
         }
         return municipioList;
     }
