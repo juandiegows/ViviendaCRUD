@@ -16,21 +16,35 @@ public class PersonaController extends Conexion {
 
     public ArrayList<PersonaDAO> Get() throws SQLException {
         ArrayList<PersonaDAO> lista = new ArrayList<PersonaDAO>();
-        String query = "SELECT * FROM Persona INNER JOIN EstadoCivil ON Persona.EstadoCivilID = EstadoCivil.ID;";
+        String query = "SELECT Cedula, Persona.Nombre AS NombrePersona, EstadoCivilID, EstadoCivil.Nombre "
+                + "AS NombreEstadoCivil FROM Persona INNER JOIN EstadoCivil ON Persona.EstadoCivilID = EstadoCivil.ID";
         Statement st = conecta().createStatement();
         ResultSet rs = st.executeQuery(query);
         while (rs.next()) {
-            lista.add(new PersonaDAO(rs.getInt("Cedula"), rs.getString("Nombre"),
+            lista.add(new PersonaDAO(rs.getInt("Cedula"), rs.getString("NombrePersona"),
                     rs.getInt("EstadoCivilID"),
-                    new EstadoCivilDAO(rs.getInt("ID"), rs.getString("Nombre"))));
-        
+                    new EstadoCivilDAO(rs.getInt("EstadoCivilID"), rs.getString("NombreEstadoCivil"))));
         }
         st.close();
         return lista;
         
     }
+    public PersonaDAO Get(int Cedula) throws SQLException {
+        
+        String query = "SELECT Cedula, Persona.Nombre AS NombrePersona, EstadoCivilID, EstadoCivil.Nombre AS"
+                + " NombreEstadoCivil FROM Persona INNER JOIN EstadoCivil ON Persona.EstadoCivilID = EstadoCivil.ID";
+        Statement st = conecta().createStatement();
+        ResultSet rs = st.executeQuery(query);
+        if (rs.next()) {
+            return new PersonaDAO(rs.getInt("Cedula"), rs.getString("NombrePersona"),
+                    rs.getInt("EstadoCivilID"),
+                    new EstadoCivilDAO(rs.getInt("EstadoCivilID"), rs.getString("NombreEstadoCivil")));
+        } else {
+            return null;
+        }
+    }
 
-    public boolean Add(PersonaDAO p) throws SQLException {
+    public boolean Create(PersonaDAO p) throws SQLException {
 
         String query = "INSERT INTO Persona (Cedula, Nombre, EstadoCivilID) VALUES (?,?,?)";
         PreparedStatement stt = conecta().prepareStatement(query);
@@ -40,7 +54,7 @@ public class PersonaController extends Conexion {
         return stt.executeUpdate() >= 1;
     }
 
-    public int UPDATE(int Cedula, PersonaDAO a) throws SQLException {
+    public int Update(int Cedula, PersonaDAO a) throws SQLException {
 
         String query = "UPDATE Persona SET Cedula = ?, Nombre = ?, EstadoCivilID = ? Where Cedula = ?";
         PreparedStatement ppST = conecta().prepareStatement(query);
@@ -51,7 +65,7 @@ public class PersonaController extends Conexion {
         return ppST.executeUpdate();
     }
 
-    public int DELETE(int Cedula) throws SQLException {
+    public int Delete(int Cedula) throws SQLException {
 
         String query = "DELETE FROM Persona WHERE Cedula = ? ";
         PreparedStatement ppst = conecta().prepareStatement(query);
@@ -59,16 +73,6 @@ public class PersonaController extends Conexion {
         return ppst.executeUpdate();
     }
 
-    public PersonaDAO Get(int Cedula) throws SQLException {
-        
-        String query = "SELECT * FROM Persona where ID = " + Cedula;
-        Statement st = conecta().createStatement();
-        ResultSet rs = st.executeQuery(query);
-        if (rs.next()) {
-            return new PersonaDAO(rs.getInt("Cedula"), rs.getString("Nombre"), rs.getInt("EstadoCivilID"), new EstadoCivilController().Get(rs.getInt("EstadoCivilID")));
-        } else {
-            return null;
-        }
-    }
+    
 
 }

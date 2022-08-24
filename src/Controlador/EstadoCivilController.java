@@ -39,7 +39,7 @@ public class EstadoCivilController extends Conexion {
         }
     }
 
-    public int Add(EstadoCivilDAO E) throws SQLException {
+    public int CREATE(EstadoCivilDAO E) throws SQLException {
 
         String query = "INSERT INTO EstadoCivil (ID, Nombre) Values (?,?)";
         PreparedStatement opreparedStatement = conecta().prepareStatement(query);
