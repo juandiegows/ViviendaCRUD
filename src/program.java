@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
 /**
  *
  * @author mejia
@@ -18,18 +16,15 @@ public class program {
 
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
      */
     public static void main(String[] args) {
         try {
-            for(PersonaViviendaDAO pv: new PersonaViviendaController().Get()){
+            for (PersonaViviendaDAO pv : new PersonaViviendaController().Get()) {
                 System.out.println(pv);
             }
         } catch (SQLException ex) {
             Logger.getLogger(program.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
-       
-    
     }
-
-}
+    }

@@ -82,6 +82,11 @@ public class ViviendaDAO {
     public void setMunicipio(MunicipioDAO Municipio) {
         this.Municipio = Municipio;
     }
+
+    @Override
+    public String toString() {
+        return "ViviendaDAO{" + "Escritura=" + Escritura + ", TipoViviendaID=" + TipoViviendaID + ", TipoVivienda=" + TipoVivienda + ", Direccion=" + Direccion + ", MunicipioID=" + MunicipioID + ", Municipio=" + Municipio + '}';
+    }
     
     
     
