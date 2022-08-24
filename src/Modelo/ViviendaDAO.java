@@ -26,7 +26,6 @@ public class ViviendaDAO {
         this.MunicipioID = MunicipioID;
     }
 
-    
     public ViviendaDAO(int Escritura, int TipoViviendaID, TipoViviendaDAO TipoVivienda, String Direccion, int MunicipioID, MunicipioDAO Municipio) {
         this.Escritura = Escritura;
         this.TipoViviendaID = TipoViviendaID;
